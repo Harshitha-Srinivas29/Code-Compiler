@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# Online Code Compiler
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An online code compiler built with React.js for the frontend and Express.js for the backend. This project allows users to write, compile, and execute code in C, C++, Python, and Java with syntax highlighting and online execution.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Prerequisites](#prerequisites)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [Features](#features)
+- [Approach](#approach)
+- [Usage](#usage)
+- [Future Enhancements](#future-enhancements)
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Before you begin, ensure you have met the following requirements:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Basic knowledge of HTML, CSS, and JavaScript
+- Basic knowledge of React.js
+- Basic knowledge of APIs, Express.js, and Node.js
 
-### `npm test`
+## Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+online-code-compiler/
+├── backend/
+│   ├── node_modules/
+│   ├── src/
+│   │   ├── routes/
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── app.js
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+├── frontend/
+│   ├── node_modules/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── App.js
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+├── README.md
+└── ...
+```
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Navigate to the `backend` directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd backend
+```
 
-### `npm run eject`
+2. Install the dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Navigate to the `frontend` directory:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+cd frontend
+```
 
-## Learn More
+2. Install the dependencies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Running the Application
 
-### Code Splitting
+### Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Start the backend server:
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The backend server will run on `http://localhost:5000`.
 
-### Making a Progressive Web App
+### Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Start the frontend development server:
 
-### Advanced Configuration
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The frontend will run on `http://localhost:3000`.
 
-### Deployment
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Write code in C, C++, Python, and Java
+- Syntax highlighting for code
+- Compile and execute code online
+- Display output and errors
 
-### `npm run build` fails to minify
+## Approach
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The application is divided into two main parts:
+
+1. **Frontend (React.js)**: Consists of three main sections:
+   - **Text Editor**: To write code with syntax highlighting
+   - **Input Box**: To provide input for the code
+   - **Output Box**: To display the output and errors
+
+2. **Backend (Express.js)**: Implements an API to compile and execute the code received from the frontend. The logic for handling different programming languages and executing the code securely is implemented here.
+
+## Usage
+
+1. Open the application in your browser (`http://localhost:3000`).
+2. Select the programming language from the dropdown.
+3. Write your code in the text editor.
+4. Provide any necessary input in the input box.
+5. Click the "Run" button to compile and execute the code.
+6. The output or any errors will be displayed in the output box.
+
+## Future Enhancements
+
+- Add more programming languages
+- Implement user authentication and authorization
+- Save and load code snippets
+- Enhance security and sandboxing of code execution
+- Improve UI/UX
