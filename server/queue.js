@@ -1,10 +1,11 @@
 const { Queue, Worker, QueueEvents } = require("bullmq");
-const { executeCode } = require("./executor");
+const { executeCode } = require(
+  process.env.NODE_ENV === "production" ? "./executor.prod" : "./executor"
+);
 
-const connection = {
-  host: "localhost",
-  port: 6379,
-};
+const connection = process.env.REDIS_URL
+  ? { url: process.env.REDIS_URL }
+  : { host: "localhost", port: 6379 };
 
 // The queue — jobs get added here
 const compileQueue = new Queue("compile", { connection });

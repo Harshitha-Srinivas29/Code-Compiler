@@ -4,7 +4,9 @@ const cors = require("cors");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { compileQueue, queueEvents } = require("./queue");
-const { executeCodeStreaming } = require("./executor");
+const { executeCodeStreaming } = require(
+  process.env.NODE_ENV === "production" ? "./executor.prod" : "./executor"
+);
 const { fixCode, generateCode, analyzeComplexity } = require("./ai");
 
 const app = express();
