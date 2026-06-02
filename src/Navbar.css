@@ -179,3 +179,32 @@
   border-radius: 50%;
   background: #afec3f;
 }
+
+/* ─── AI BUTTONS ─────────────────────────────────── */
+.nav-ai-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #0e0e0e;
+  background: #afec3f;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+
+.nav-ai-btn:hover    { background: #c5ff55; }
+.nav-ai-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.nav-ai-btn--outline {
+  background: transparent;
+  color: #afec3f;
+  border: 1px solid #2a2a2a;
+}
+
+.nav-ai-btn--outline:hover {
+  background: transparent;
+  border-color: #afec3f;
+}

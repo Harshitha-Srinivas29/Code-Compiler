@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { compileQueue, queueEvents } = require("./queue");
 const { executeCodeStreaming } = require("./executor");
+const { fixCode, generateCode, analyzeComplexity } = require("./ai");
 
 const app = express();
 const httpServer = createServer(app);
@@ -16,6 +18,48 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
+
+// ── AI: Fix error ──────────────────────────────────────────────
+app.post("/ai/fix", async (req, res) => {
+  const { code, language, error } = req.body;
+  if (!code || !language || !error)
+    return res.status(400).json({ error: "code, language and error are required" });
+  try {
+    const fixed = await fixCode({ code, language, error });
+    res.json({ result: fixed });
+  } catch (err) {
+    console.error("[AI Fix]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── AI: Generate code ──────────────────────────────────────────
+app.post("/ai/generate", async (req, res) => {
+  const { prompt, language } = req.body;
+  if (!prompt || !language)
+    return res.status(400).json({ error: "prompt and language are required" });
+  try {
+    const generated = await generateCode({ prompt, language });
+    res.json({ result: generated });
+  } catch (err) {
+    console.error("[AI Generate]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── AI: Analyze complexity ─────────────────────────────────────
+app.post("/ai/analyze", async (req, res) => {
+  const { code, language } = req.body;
+  if (!code || !language)
+    return res.status(400).json({ error: "code and language are required" });
+  try {
+    const analysis = await analyzeComplexity({ code, language });
+    res.json({ result: analysis });
+  } catch (err) {
+    console.error("[AI Analyze]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // REST endpoint (queue-backed, returns full result)
 app.post("/compile", async (req, res) => {

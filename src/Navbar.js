@@ -4,15 +4,16 @@ import './Navbar.css';
 const Navbar = ({
   userLang, setUserLang,
   userTheme, setUserTheme,
-  fontSize, setFontSize
+  fontSize, setFontSize,
+  onGenerate, onAnalyze, aiLoading
 }) => {
 
   const languages = [
-    { value: "c",      label: "C"      },
-    { value: "cpp",    label: "C++"    },
-    { value: "python", label: "Python" },
-    { value: "java",   label: "Java"   },
-    { value: "javascript", label: "JavaScript"},
+    { value: "c",          label: "C"          },
+    { value: "cpp",        label: "C++"        },
+    { value: "python",     label: "Python"     },
+    { value: "java",       label: "Java"       },
+    { value: "javascript", label: "JavaScript" },
   ];
 
   const themes = [
@@ -39,26 +40,15 @@ const Navbar = ({
 
       {/* Controls */}
       <div className="navbar-controls">
-
         <div className="select-wrapper">
-          <select
-            value={userLang}
-            onChange={(e) => setUserLang(e.target.value)}
-          >
-            {languages.map(l => (
-              <option key={l.value} value={l.value}>{l.label}</option>
-            ))}
+          <select value={userLang} onChange={(e) => setUserLang(e.target.value)}>
+            {languages.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
           </select>
         </div>
 
         <div className="select-wrapper">
-          <select
-            value={userTheme}
-            onChange={(e) => setUserTheme(e.target.value)}
-          >
-            {themes.map(t => (
-              <option key={t.value} value={t.value}>{t.label}</option>
-            ))}
+          <select value={userTheme} onChange={(e) => setUserTheme(e.target.value)}>
+            {themes.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
           </select>
         </div>
 
@@ -67,20 +57,36 @@ const Navbar = ({
         <div className="font-control">
           <label>Font</label>
           <input
-            type="range"
-            min="12"
-            max="28"
-            step="1"
+            type="range" min="12" max="28" step="1"
             value={fontSize}
             onChange={(e) => setFontSize(Number(e.target.value))}
           />
           <span className="font-size-val">{fontSize}</span>
         </div>
-
       </div>
 
-      {/* Right — status indicator */}
+      {/* AI Buttons */}
       <div className="navbar-right">
+        <button
+          className="nav-ai-btn"
+          onClick={onGenerate}
+          disabled={!!aiLoading}
+          title="Generate code from description"
+        >
+          ✦ Generate
+        </button>
+
+        <button
+          className="nav-ai-btn nav-ai-btn--outline"
+          onClick={onAnalyze}
+          disabled={!!aiLoading}
+          title="Analyze time & space complexity"
+        >
+          {aiLoading === "analyze" ? "Analyzing..." : "⊙ Complexity"}
+        </button>
+
+        <div className="navbar-divider" />
+
         <div className="status-pill">
           <div className="status-dot" />
           ready
