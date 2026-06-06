@@ -12,18 +12,25 @@ const { fixCode, generateCode, analyzeComplexity } = require("./ai");
 const app = express();
 const httpServer = createServer(app);
 
-const io = new Server(httpServer, {
-  cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
-});
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://code-compiler-khaki.vercel.app/",
+];
 
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://code-compiler-khaki.vercel.app/",
-  ],
+  origin: allowedOrigins,
   methods: ["GET", "POST"],
   credentials: true
 }));
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true
+  },
+  transports: ["websocket", "polling"], // explicitly allow both
+});
 
 app.use(express.json());
 

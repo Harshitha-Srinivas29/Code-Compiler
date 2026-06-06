@@ -4,7 +4,10 @@ import { Editor } from '@monaco-editor/react';
 import Navbar from './Navbar';
 import { io } from 'socket.io-client';
 
-const socket = io(process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000');
+const socket = io(process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000', {
+  transports: ["websocket", "polling"],
+  withCredentials: true,
+});
 const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 
 const DEFAULT_CODE = {
