@@ -16,7 +16,15 @@ const io = new Server(httpServer, {
   cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
 });
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://code-compiler-khaki.vercel.app/",
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
